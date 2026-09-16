@@ -1,5 +1,6 @@
 #!/bin/bash
-# AMRFinderPlus analysis of E. coli k-12 MG1655 and  AR Bank #0346
+
+# AMRFinderPlus analysis of E. coli K-12 MG1655 and AR Bank #0346
 
 set -e
 
