@@ -176,6 +176,25 @@ The analysis results were visualized to summarize:
 
 Figures are available in [`results/figures/`](results/figures/).
 
+## Genomic Context Analysis
+
+Genomic context analysis was performed to examine the local genomic environments of selected AMR determinants, with particular focus on `mcr-1.1` and `blaCTX-M-55`.
+
+The **`mcr-1.1`** determinant was located on plasmid **CP066368.1** downstream of a region containing the mobilization-associated proteins **MobC** and **MbeA DNA relaxase**. This organization is consistent with a plasmid mobilization-associated context, although genomic proximity alone does not demonstrate horizontal gene transfer.
+
+Two copies of **`blaCTX-M-55`** were identified. The copy on plasmid **CP066367.1** was located within a region containing multiple IS6-family/IS15 transposases and additional AMR determinants, including `fosA3` and `blaTEM`. The second copy, located on plasmid **CP066368.1**, was surrounded primarily by hypothetical and other annotated proteins, with no obvious adjacent mobility-associated gene identified in the examined region.
+
+### Genomic Context Summary
+
+| AMR determinant | Replicon | Coordinates | Key genomic context |
+|---|---|---:|---|
+| `mcr-1.1` | CP066368.1 | 23,493–25,118 | Located downstream of `mbeA` DNA relaxase and `MobC` mobilization protein |
+| `blaCTX-M-55` | CP066367.1 | 86,270–87,145 | Located in a region containing `fosA3`, `blaTEM`, `wbuC`, and multiple IS6-family/IS15 transposases |
+| `blaCTX-M-55` | CP066368.1 | 7,385–8,260 | Located among predominantly hypothetical/other annotated proteins |
+
+This analysis provides genomic-context evidence for further investigation of plasmid-associated AMR and mobile genetic elements.
+
+
 ## Key Finding
 
 A major finding was the detection of **`mcr-1.1` on plasmid CP066368.1**.
