@@ -4,3 +4,5 @@ plasmid_amr_occurrences12
 total_amr_gene_replicon_occurrences23
 plasmid_amr_occurrence_percentage52.2
 unique_amr_determinants18
+unique_amr_determinants_with_plasmid_copy	11
+percentage_unique_amr_determinants_with_plasmid_copy	61.1%
