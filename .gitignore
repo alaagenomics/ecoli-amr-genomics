@@ -1,0 +1,19 @@
+# Raw genome sequences
+data/raw/
+
+# Large/local databases
+*.tar.xz
+*.msh
+
+# Temporary MAFFT files
+mafft.*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Conda/environment files
+.env
+
+# Duplicate QUAST output
+quast_results/

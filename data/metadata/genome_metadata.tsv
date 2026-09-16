@@ -1,0 +1,3 @@
+sample      strain  type    assembly_accession  replicon_accession  status
+k12_MG1655      Escherichia coli k-12 MG1655  reference   GCF_000005845.2 NC_000913.3 Complete  
+AR0346     Escherichia coli AR Bank #0346   resistant_isolate       CP066366.1;CP066367.1;CP066368.1     Complete   

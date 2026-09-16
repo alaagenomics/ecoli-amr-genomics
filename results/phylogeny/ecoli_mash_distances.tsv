@@ -1,0 +1,5 @@
+data/raw/GCF_000005845.2_ASM584v2_genomic.fna	data/raw/ar0346/CP066366.fna	0.00564181	0	799/1000
+data/raw/GCF_000005845.2_ASM584v2_genomic.fna	data/raw/phylogeny/EC958.fna	0.0296126	0	367/1000
+data/raw/GCF_000005845.2_ASM584v2_genomic.fna	data/raw/phylogeny/CFT073.fna	0.0312752	0	350/1000
+data/raw/GCF_000005845.2_ASM584v2_genomic.fna	data/raw/phylogeny/W3110.fna	9.55247e-05	0	996/1000
+data/raw/GCF_000005845.2_ASM584v2_genomic.fna	data/raw/phylogeny/EDL933.fna	0.0223484	0	455/1000
