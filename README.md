@@ -176,6 +176,30 @@ The analysis results were visualized to summarize:
 
 Figures are available in [`results/figures/`](results/figures/).
 
+### AMR Class by Genomic Location
+
+The distribution of AMR gene-replicon occurrences was further examined by antibiotic class and genomic location.
+
+| Antibiotic class | Chromosome | Plasmid | Total |
+|---|---:|---:|---:|
+| Aminoglycoside | 3 | 3 | 6 |
+| Beta-lactam | 2 | 4 | 6 |
+| Colistin | 0 | 1 | 1 |
+| Fosfomycin | 0 | 1 | 1 |
+| Macrolide | 2 | 0 | 2 |
+| Phenicol | 1 | 1 | 2 |
+| Sulfonamide | 2 | 1 | 3 |
+| Tetracycline | 0 | 1 | 1 |
+| Trimethoprim | 1 | 0 | 1 |
+
+Across the 23 AMR gene-replicon occurrences, **12 (52.2%) were plasmid-associated** and **11 (47.8%) were chromosomal**.
+
+Considering unique AMR determinants, **11 of 18 (61.1%) had at least one plasmid-associated copy**.
+
+The class-specific distribution showed that plasmid-associated occurrences were particularly represented among beta-lactam and aminoglycoside resistance determinants. Colistin, fosfomycin, and tetracycline resistance determinants were detected only on plasmid replicons in this dataset, whereas macrolide and trimethoprim determinants were detected only on the chromosome.
+
+A visualization of this distribution is provided in [`results/figures/amr_class_by_location.png`](results/figures/amr_class_by_location.png).
+
 ## Genomic Context Analysis
 
 Genomic context analysis was performed to examine the local genomic environments of selected AMR determinants, with particular focus on `mcr-1.1` and `blaCTX-M-55`.
