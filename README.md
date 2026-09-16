@@ -52,8 +52,9 @@ The analysis was performed using a reproducible command-line workflow:
 4. Antimicrobial resistance detection with AMRFinderPlus
 5. Classification of AMR determinants by antibiotic class
 6. Analysis of AMR determinants by genomic replicon
-7. Comparative genomic analysis
-8. Data visualization and biological interpretation
+7. Comparative AMR analysis
+8. AMR data visualization
+9. Further genomic context and phylogenetic analysis
 
 ## Software and Tools
 
@@ -80,7 +81,7 @@ QUAST analysis confirmed a complete single-contig reference genome:
 
 ### *E. coli* AR Bank #0346
 
-QUAST analysis identified three complete sequence replicons consisting of one chromosome and two plasmids:
+QUAST analysis identified three sequence replicons consisting of one chromosome and two plasmids:
 
 * Total sequence length: 4,885,435 bp
 * Number of replicons: 3
@@ -106,9 +107,15 @@ The annotation provides genomic features that support downstream analysis of AMR
 
 ## Antimicrobial Resistance Analysis
 
-AMRFinderPlus was used to identify antimicrobial resistance determinants in *E. coli* AR Bank #0346.
+AMRFinderPlus was used to identify antimicrobial resistance determinants in *E. coli* K-12 MG1655 and *E. coli* AR Bank #0346.
 
-A total of **18 unique AMR determinants** were identified.
+No AMRFinderPlus antimicrobial resistance determinants were detected in the K-12 MG1655 reference genome under the analysis conditions used.
+
+A total of **18 unique AMR determinants** were identified in AR Bank #0346.
+
+These determinants were distributed across multiple antimicrobial classes, including aminoglycosides, beta-lactams, phenicols, macrolides, sulfonamides, trimethoprim, fosfomycin, colistin, and tetracyclines.
+
+The AR Bank #0346 isolate contained AMR determinants on both chromosomal and plasmid replicons, with some determinants detected on more than one replicon.
 
 ### AMR Determinants
 
@@ -159,9 +166,21 @@ Aminoglycoside and beta-lactam resistance had the highest number of unique deter
 
 These counts represent **gene-replicon occurrences**, rather than unique genes. Therefore, the counts can exceed 18 because several AMR determinants were detected on more than one replicon.
 
+## AMR Visualization
+
+The analysis results were visualized to summarize:
+
+* AMR determinants by antibiotic class
+* AMR determinant occurrences by genomic replicon
+* Comparison of AMR determinants between K-12 MG1655 and AR Bank #0346
+
+Figures are available in [`results/figures/`](results/figures/).
+
 ## Key Finding
 
 A major finding was the detection of **`mcr-1.1` on plasmid CP066368.1**.
+
+AMRFinderPlus detected **18 unique AMR determinants** in AR Bank #0346 compared with **0 detected AMR determinants** in the K-12 MG1655 reference genome under the analysis conditions used.
 
 The *mcr-1* family is associated with resistance to colistin, an important antimicrobial used in the treatment of infections caused by multidrug-resistant Gram-negative bacteria.
 
@@ -169,7 +188,7 @@ The isolate also contained resistance determinants associated with beta-lactams,
 
 Plasmid CP066367.1 carried a diverse collection of AMR determinants, while CP066368.1 carried both **`mcr-1.1`** and **`blaCTX-M-55`**.
 
-This distribution provides a basis for investigating the contribution of plasmids and other mobile genetic elements to antimicrobial resistance.
+This distribution provides a basis for further investigation of the contribution of plasmids and other mobile genetic elements to antimicrobial resistance.
 
 ## Interpretation
 
@@ -179,7 +198,7 @@ AMR determinants were distributed across both the chromosome and plasmids, with 
 
 The detection of plasmid-associated **`mcr-1.1`** is particularly relevant because plasmid-mediated resistance determinants have the potential to contribute to horizontal transfer of antimicrobial resistance between bacterial populations.
 
-Further analysis will examine the genomic context of these determinants and their relationship to other genomic features.
+Further analysis will examine the genomic context of these determinants, their association with mobile genetic elements, and their relationship to other genomic features.
 
 ## Important Analytical Notes
 
@@ -208,7 +227,7 @@ The **`qacEdelta1`** determinant was also detected. AMRFinderPlus classified it 
 
 The analysis is being performed using command-line bioinformatics tools in a Conda-managed Linux/WSL2 environment.
 
-The repository will contain analysis results, scripts, figures, and documentation supporting reproducibility of the workflow.
+The repository contains analysis results, scripts, figures, and documentation supporting reproducibility of the workflow.
 
 ## Research Relevance
 
