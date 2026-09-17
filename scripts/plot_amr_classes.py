@@ -18,7 +18,7 @@ plt.title("Antimicrobial resistance determinants by antibiotic class")
 plt.xticks(rotation=45, ha="right")
 plt.tight_layout()
 plt.savefig(
-     "results/figures/amr_by_antibiotic_class,png",
+     "results/figures/amr_by_antibiotic_class.png",
       dpi=300,
       bbox_inches="tight"
 )

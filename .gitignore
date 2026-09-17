@@ -17,3 +17,14 @@ __pycache__/
 
 # Duplicate QUAST output
 quast_results/
+# =========================
+# Bakta generated intermediate outputs
+# =========================
+*.embl
+*.faa
+*.ffn
+*.hypotheticals.faa
+*.hypotheticals.tsv
+*.inference.tsv
+*.json
+*.svg

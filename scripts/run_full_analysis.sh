@@ -15,7 +15,7 @@ quast.py "$AR0346" -o results/qc/ar0346_quast
 
 echo "[2/4] Genome annotation with Bakta..."
 bakta "$K12" \
-    --output results/annotation/k12_bakta \
+    --output results/annotation/k12_bakta_v3 \
     --prefix ecoli_k12 \
     --force
 

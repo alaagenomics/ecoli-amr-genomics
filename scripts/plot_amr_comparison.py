@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 samples= [
      "K-12 MG1655",
-     " AR Bank #0346"
+     "AR Bank #0346"
 ]
 
 counts= [0, 18]
