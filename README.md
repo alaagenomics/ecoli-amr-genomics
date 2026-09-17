@@ -1,77 +1,64 @@
 # Comparative Genomic Analysis of Antimicrobial Resistance in *Escherichia coli*
 
-## Project Overview
+## Project overview
 
-This project investigates the genomic distribution of antimicrobial resistance (AMR) determinants in *Escherichia coli* using publicly available whole-genome sequence data and command-line bioinformatics tools.
+This project investigates antimicrobial resistance (AMR) in two *Escherichia coli* genomes using publicly available whole-genome sequencing data.
 
-The analysis compares *E. coli* K-12 MG1655, a complete reference strain, with *E. coli* AR Bank #0346, a multidrug-resistant isolate from the CDC & FDA Antimicrobial Resistance Isolate Bank.
+The analysis compares the laboratory strain *E. coli* K-12 MG1655 with *E. coli* AR Bank #0346, an isolate from the CDC & FDA Antibiotic Resistance Isolate Bank. The project combines genome quality assessment, genome annotation, AMR detection, genomic replicon analysis, genomic-context inspection, and whole-genome distance analysis.
 
-The project focuses on:
-
-* Genome quality assessment
-* Bacterial genome annotation
-* AMR determinant identification
-* AMR classification by antibiotic class
-* Chromosomal and plasmid localization of AMR determinants
-* Comparative AMR analysis
-* Genomic context of selected resistance determinants
-* Whole-genome distance analysis using Mash
-* Data visualization and reproducible scripting
-
-This project was developed as a practical bacterial genomics and antimicrobial resistance bioinformatics portfolio project.
+The main objective was to explore how the detected AMR determinants differ between the two genomes and how the determinants identified in AR Bank #0346 are distributed across chromosomal and plasmid replicons.
 
 ---
 
-## Research Question
+## Research question
 
-**How does the genomic distribution of antimicrobial resistance determinants differ between a reference *E. coli* strain and a multidrug-resistant *E. coli* isolate?**
+How do antimicrobial resistance determinants differ between *E. coli* K-12 MG1655 and AR Bank #0346, and what is their distribution across chromosomal and plasmid replicons?
 
 ---
 
 ## Objectives
 
-1. Assess the quality and genomic structure of the selected *E. coli* genomes.
-2. Annotate bacterial genomic features using Bakta.
-3. Identify AMR determinants using AMRFinderPlus.
-4. Classify detected determinants by antibiotic class.
-5. Determine the genomic replicon associated with each AMR determinant.
-6. Compare AMR profiles between K-12 MG1655 and AR Bank #0346.
-7. Examine the genomic context of selected AMR determinants.
-8. Investigate whole-genome similarity and distance using Mash.
-9. Generate figures and summary tables using Python.
-10. Organize the workflow into reproducible command-line scripts.
+* Assess genome assembly quality using QUAST
+* Annotate the genomes using Bakta
+* Identify AMR-associated determinants using AMRFinderPlus
+* Compare AMR profiles between the two *E. coli* genomes
+* Classify detected determinants by antibiotic class
+* Examine their distribution across chromosome and plasmids
+* Inspect genomic context around selected resistance determinants
+* Explore whole-genome distances among a small set of *E. coli* genomes
+* Generate reproducible tables, figures, and analysis scripts
 
 ---
 
 ## Dataset
 
-### *Escherichia coli* K-12 MG1655
+Two primary *E. coli* genomes were analyzed.
 
-| Feature             | Information     |
-| ------------------- | --------------- |
-| Strain              | K-12 MG1655     |
-| RefSeq assembly     | GCF_000005845.2 |
-| Assembly            | ASM584v2        |
-| Chromosome          | NC_000913.3     |
-| Genome status       | Complete        |
-| Number of replicons | 1               |
+| Genome                  | Accession / source         | Assembly | Replicons |
+| ----------------------- | -------------------------- | -------- | --------: |
+| *E. coli* K-12 MG1655   | GCF_000005845.2 / ASM584v2 | Complete |         1 |
+| *E. coli* AR Bank #0346 | CDC & FDA AMR Isolate Bank | Complete |         3 |
 
-### *Escherichia coli* AR Bank #0346
+### K-12 MG1655
 
-| Feature             | Information                                     |
-| ------------------- | ----------------------------------------------- |
-| Isolate             | AR Bank #0346                                   |
-| Source              | CDC & FDA Antimicrobial Resistance Isolate Bank |
-| Chromosome          | CP066366.1                                      |
-| Plasmid 1           | CP066367.1                                      |
-| Plasmid 2           | CP066368.1                                      |
-| Number of replicons | 3                                               |
+* Assembly: ASM584v2
+* GenBank accession: NC_000913.3
+* Complete genome
+* One chromosomal replicon
+
+### AR Bank #0346
+
+* Source: CDC & FDA Antibiotic Resistance Isolate Bank
+* Chromosome: CP066366.1
+* Plasmid: CP066367.1
+* Plasmid: CP066368.1
+* Three complete replicons
+
+The raw genome files are not included in this repository. The analysis scripts reference the expected local input paths.
 
 ---
 
-## Bioinformatics Workflow
-
-The analysis was performed using a command-line workflow in Linux/WSL2 with Conda-managed software.
+## Workflow
 
 ```text
 Public genome data
@@ -79,144 +66,151 @@ Public genome data
        ▼
 Genome quality assessment
        │
+       └── QUAST
+       │
        ▼
 Genome annotation
+       │
+       └── Bakta
        │
        ▼
 AMR detection
        │
-       ▼
-AMR classification
-       │
-       ├── Chromosome vs plasmid
-       │
-       ├── Antibiotic class
-       │
-       └── Comparative analysis
+       └── AMRFinderPlus
        │
        ▼
-Genomic context analysis
+AMR result processing
+       │
+       ├── Antibiotic class analysis
+       ├── K-12 vs AR0346 comparison
+       ├── Chromosome vs plasmid analysis
+       └── Genomic-context inspection
        │
        ▼
 Whole-genome distance analysis
        │
+       ├── Mash distances
+       └── Neighbor-joining tree
+       │
        ▼
-Visualization and interpretation
+Visualization
 ```
 
-### Tools
+The main Bash workflow automates genome quality assessment, genome annotation, and AMR detection using QUAST, Bakta, and AMRFinderPlus.
 
-| Tool          | Purpose                             |
-| ------------- | ----------------------------------- |
-| Linux / WSL2  | Command-line analysis environment   |
-| Conda         | Environment and software management |
-| Bash          | Workflow automation                 |
-| Python        | Data analysis and visualization     |
-| QUAST         | Genome quality assessment           |
-| Bakta         | Bacterial genome annotation         |
-| AMRFinderPlus | AMR determinant detection           |
-| Mash          | Whole-genome distance analysis      |
+Additional Bash and Python scripts were used to process AMR results, compare resistance profiles, analyze genomic replicons, construct a neighbor-joining tree from Mash distances, and generate figures.
 
 ---
 
-## Genome Quality Assessment
+## Tools and technologies
+
+* Linux / WSL2
+* Conda
+* Bash
+* Python
+* QUAST
+* Bakta
+* AMRFinderPlus
+* Mash
+* Biopython
+* Matplotlib
+
+---
+
+# 1. Genome quality assessment
+
+Genome assemblies were assessed using QUAST.
 
 ### K-12 MG1655
 
-QUAST confirmed a complete single-contig reference genome:
-
-* Genome size: 4,641,652 bp
-* Number of contigs: 1
-* Largest contig: 4,641,652 bp
-* N50: 4,641,652 bp
-* GC content: 50.79%
-* Ns per 100 kb: 0
+| Metric         |       Result |
+| -------------- | -----------: |
+| Genome length  | 4,641,652 bp |
+| Contigs        |            1 |
+| Largest contig | 4,641,652 bp |
+| N50            | 4,641,652 bp |
+| GC content     |       50.79% |
+| Ns per 100 kbp |            0 |
 
 ### AR Bank #0346
 
-The AR Bank #0346 assembly contains one chromosome and two plasmids:
+| Metric            |       Result |
+| ----------------- | -----------: |
+| Total length      | 4,885,435 bp |
+| Replicons         |            3 |
+| Chromosome length | 4,718,281 bp |
+| N50               | 4,718,281 bp |
+| GC content        |       50.68% |
+| Ns per 100 kbp    |            0 |
 
-* Total sequence length: 4,885,435 bp
-* Number of replicons: 3
-* Chromosome length: 4,718,281 bp
-* N50: 4,718,281 bp
-* GC content: 50.68%
-* Ns per 100 kb: 0
-
-Detailed QC output is available in:
-
-`results/qc/ar0346_quast_report.tsv`
+The complete assemblies contain no ambiguous bases reported in the evaluated QUAST metrics.
 
 ---
 
-## Genome Annotation
+# 2. Genome annotation
 
 Genome annotation was performed using Bakta.
 
-For AR Bank #0346, the annotation identified:
+For AR Bank #0346, the annotation included:
 
-* 4,573 coding sequences (CDSs)
-* 87 tRNAs
-* 22 rRNAs
-* 228 ncRNAs
-* 2 CRISPR arrays
-* 3 genomic replicons
+| Feature       | Count |
+| ------------- | ----: |
+| CDS           | 4,573 |
+| tRNAs         |    87 |
+| rRNAs         |    22 |
+| ncRNAs        |   228 |
+| CRISPR arrays |     2 |
+| Replicons     |     3 |
 
-Annotation outputs are provided in:
-
-`results/annotation/`
-
-The annotation was subsequently used to investigate the genomic context of selected AMR determinants.
+Bakta annotation outputs are retained selectively in the repository to provide useful annotation results without committing every intermediate output generated by the software.
 
 ---
 
-# Antimicrobial Resistance Analysis
+# 3. AMR detection
 
-AMRFinderPlus was used to identify antimicrobial resistance determinants in both genomes.
+AMR-associated determinants were identified using **AMRFinderPlus**.
 
-Under the analysis conditions used:
+### Overall comparison
 
-* **K-12 MG1655:** 0 AMR determinants detected
-* **AR Bank #0346:** 18 unique AMR determinants detected
+| Genome        | Unique AMR determinants |
+| ------------- | ----------------------: |
+| K-12 MG1655   |                       0 |
+| AR Bank #0346 |                      18 |
 
-The AR Bank #0346 isolate contained determinants associated with multiple antimicrobial classes, including:
+The AR Bank #0346 genome contained 18 unique AMR determinants identified by AMRFinderPlus, while no AMR determinants were detected in the K-12 MG1655 genome using the same analysis.
 
-* Aminoglycosides
-* Beta-lactams
-* Phenicols
-* Macrolides
-* Sulfonamides
-* Trimethoprim
-* Fosfomycin
-* Colistin
-* Tetracyclines
+### Detected AMR determinants in AR Bank #0346
 
-### AMR Determinants Identified in AR Bank #0346
+| Determinant      | Antibiotic class |
+| ---------------- | ---------------- |
+| `aadA5`          | Aminoglycoside   |
+| `aph(3'')-Ib`    | Aminoglycoside   |
+| `aph(6)-Id`      | Aminoglycoside   |
+| `rmtB1`          | Aminoglycoside   |
+| `blaCMY-2`       | Beta-lactam      |
+| `blaCTX-M-55`    | Beta-lactam      |
+| `blaTEM` partial | Beta-lactam      |
+| `blaTEM-1`       | Beta-lactam      |
+| `catA1`          | Phenicol         |
+| `floR`           | Phenicol         |
+| `dfrA17`         | Trimethoprim     |
+| `fosA3`          | Fosfomycin       |
+| `mcr-1.1`        | Colistin         |
+| `mph(A)`         | Macrolide        |
+| `mrx(A)`         | Macrolide        |
+| `sul1`           | Sulfonamide      |
+| `sul2`           | Sulfonamide      |
+| `tet(A)`         | Tetracycline     |
 
-| Gene          | Antibiotic class | Genomic location                 |
-| ------------- | ---------------- | -------------------------------- |
-| `aadA5`       | Aminoglycoside   | Chromosome                       |
-| `aph(3'')-Ib` | Aminoglycoside   | Chromosome + plasmid             |
-| `aph(6)-Id`   | Aminoglycoside   | Chromosome + plasmid             |
-| `rmtB1`       | Aminoglycoside   | Plasmid CP066367.1               |
-| `blaCMY-2`    | Beta-lactam      | Chromosome                       |
-| `blaCTX-M-55` | Beta-lactam      | Plasmids CP066367.1 + CP066368.1 |
-| `blaTEM`      | Beta-lactam      | Plasmid CP066367.1, partial hit  |
-| `blaTEM-1`    | Beta-lactam      | Chromosome + plasmid             |
-| `catA1`       | Phenicol         | Chromosome                       |
-| `floR`        | Phenicol         | Plasmid CP066367.1               |
-| `dfrA17`      | Trimethoprim     | Chromosome                       |
-| `fosA3`       | Fosfomycin       | Plasmid CP066367.1               |
-| `mcr-1.1`     | Colistin         | Plasmid CP066368.1               |
-| `mph(A)`      | Macrolide        | Chromosome                       |
-| `mrx(A)`      | Macrolide        | Chromosome                       |
-| `sul1`        | Sulfonamide      | Chromosome                       |
-| `sul2`        | Sulfonamide      | Chromosome + plasmid             |
-| `tet(A)`      | Tetracycline     | Plasmid CP066367.1               |
+The partial `blaTEM` hit is reported separately from the complete `blaTEM-1` determinant.
+
+AMRFinderPlus also identified `qacEdelta1`, which was classified as a biocide/stress-associated determinant rather than an AMR determinant and was therefore excluded from the 18-deteminant AMR count.
 
 ---
 
-## AMR Determinants by Antibiotic Class
+# 4. AMR determinants by antibiotic class
+
+The 18 unique AMR determinants were distributed across nine antibiotic classes.
 
 | Antibiotic class | Unique determinants |
 | ---------------- | ------------------: |
@@ -230,30 +224,39 @@ The AR Bank #0346 isolate contained determinants associated with multiple antimi
 | Colistin         |                   1 |
 | Tetracycline     |                   1 |
 
-Aminoglycoside and beta-lactam resistance had the highest number of unique determinants in this dataset, with four determinants detected in each class.
+The corresponding visualization is:
+
+`results/figures/amr_by_antibiotic_class.png`
 
 ---
 
-## AMR Determinants by Genomic Replicon
+# 5. AMR determinants by genomic replicon
 
-| Replicon              | AMR determinant occurrences |
-| --------------------- | --------------------------: |
-| Chromosome CP066366.1 |                          11 |
-| Plasmid CP066367.1    |                          10 |
-| Plasmid CP066368.1    |                           2 |
+AMR results were examined according to the replicon on which each determinant occurrence was identified.
 
-These values represent **gene-replicon occurrences rather than unique genes**. Therefore, the total number of occurrences can exceed the 18 unique AMR determinants because some determinants were detected on more than one replicon.
+| Replicon              | AMR gene-replicon occurrences |
+| --------------------- | ----------------------------: |
+| Chromosome CP066366.1 |                            11 |
+| Plasmid CP066367.1    |                            10 |
+| Plasmid CP066368.1    |                             2 |
+| **Total**             |                        **23** |
 
-Across the 23 AMR gene-replicon occurrences:
+Across the 23 gene-replicon occurrences:
 
-* 12 (52.2%) were plasmid-associated
-* 11 (47.8%) were chromosomal
+* 11 were chromosomal
+* 12 were plasmid-associated
+* 52.2% were plasmid-associated
+* 47.8% were chromosomal
 
-Considering unique determinants, **11 of 18 (61.1%) had at least one plasmid-associated copy**.
+Of the 18 unique AMR determinants, 11 had at least one plasmid-associated occurrence.
+
+These counts refer to **gene-replicon occurrences**, meaning that a determinant occurring on more than one replicon contributes more than once to the occurrence count.
 
 ---
 
-## AMR Distribution by Antibiotic Class and Genomic Location
+# 6. AMR class by genomic location
+
+The distribution of AMR gene-replicon occurrences was also examined by antibiotic class.
 
 | Antibiotic class | Chromosome | Plasmid | Total |
 | ---------------- | ---------: | ------: | ----: |
@@ -267,205 +270,214 @@ Considering unique determinants, **11 of 18 (61.1%) had at least one plasmid-ass
 | Tetracycline     |          0 |       1 |     1 |
 | Trimethoprim     |          1 |       0 |     1 |
 
-Plasmid-associated occurrences were particularly represented among beta-lactam and aminoglycoside determinants.
-
-In this dataset, colistin, fosfomycin, and tetracycline determinants were detected only on plasmid replicons, while the detected macrolide and trimethoprim determinants were chromosomal.
-
-The corresponding visualization is available at:
+The corresponding stacked bar chart is:
 
 `results/figures/amr_class_by_location.png`
 
+The plasmid-associated observations indicate genomic location of the detected determinants. They do not by themselves establish plasmid-mediated expression, transferability, or horizontal gene transfer.
+
 ---
 
-# Genomic Context Analysis
+# 7. Genomic context of selected AMR determinants
 
-Genomic context analysis was performed for selected AMR determinants, with particular focus on `mcr-1.1` and `blaCTX-M-55`.
+Selected resistance determinants were examined in their surrounding genomic context using the annotated genome.
 
 ### `mcr-1.1`
 
-The `mcr-1.1` determinant was located on plasmid CP066368.1 downstream of a region containing the mobilization-associated proteins MobC and MbeA DNA relaxase.
+The `mcr-1.1` determinant was identified on plasmid CP066368.1 at approximately:
 
-This genomic arrangement provides evidence of a **mobilization-associated local context**, although genomic proximity alone does not demonstrate horizontal gene transfer.
+```text
+23,493–25,118
+```
+
+The surrounding region included `MobC` and `MbeA` DNA relaxase-associated annotations.
+
+This genomic proximity is consistent with a region containing mobility-associated functions, but proximity alone does not demonstrate horizontal gene transfer.
 
 ### `blaCTX-M-55`
 
-Two copies of `blaCTX-M-55` were identified.
+One `blaCTX-M-55` copy was identified on plasmid CP066367.1 at approximately:
 
-The copy on plasmid CP066367.1 was located within a region containing:
+```text
+86,270–87,145
+```
+
+The surrounding region included:
 
 * `fosA3`
 * `blaTEM`
 * `wbuC`
-* Multiple IS6-family/IS15 transposases
+* multiple IS6-family / IS15-family transposase-associated annotations
 
-The second copy, located on plasmid CP066368.1, was surrounded primarily by hypothetical and other annotated proteins, without an obvious adjacent mobility-associated gene identified in the examined region.
+A second `blaCTX-M-55` copy was identified on plasmid CP066368.1 at approximately:
 
-### Genomic Context Summary
+```text
+7,385–8,260
+```
 
-| AMR determinant | Replicon   |   Coordinates | Key genomic context                                                                    |
-| --------------- | ---------- | ------------: | -------------------------------------------------------------------------------------- |
-| `mcr-1.1`       | CP066368.1 | 23,493–25,118 | Downstream of `mbeA` DNA relaxase and MobC                                             |
-| `blaCTX-M-55`   | CP066367.1 | 86,270–87,145 | Region containing `fosA3`, `blaTEM`, `wbuC`, and multiple IS6-family/IS15 transposases |
-| `blaCTX-M-55`   | CP066368.1 |   7,385–8,260 | Region containing predominantly hypothetical/other annotated proteins                  |
+The surrounding region was predominantly annotated with hypothetical or other proteins, and no obvious adjacent mobility-associated gene was identified within the examined region.
 
-These observations provide genomic-context evidence for further investigation of plasmid-associated AMR and mobile genetic elements. They should not be interpreted as direct evidence of horizontal gene transfer.
+These observations describe genomic context and do not by themselves establish the mechanism by which resistance determinants were acquired or transferred.
 
 ---
 
-# Whole-Genome Distance Analysis
+# 8. Whole-genome distance analysis
 
-Whole-genome distance analysis was performed using Mash.
+A small set of six *E. coli* genomes was examined using Mash-based whole-genome distances:
 
-The resulting Mash distances were used to construct a neighbor-joining tree to visualize genomic relationships among the analyzed *E. coli* genomes.
+* K-12 MG1655
+* AR Bank #0346
+* EC958
+* CFT073
+* W3110
+* EDL933
 
-Outputs include:
+Pairwise whole-genome distances were used to construct a neighbor-joining tree with Biopython.
 
-* Mash sketches
-* Pairwise genomic distances
-* Neighbor-joining tree
-* Tree visualization
+The resulting tree is available as:
 
-Files are available in:
+```text
+results/phylogeny/ecoli_mash_neighbor_joining.nwk
+```
 
-`results/phylogeny/`
+and visualized as:
 
-The resulting figure is available at:
+```text
+results/figures/ecoli_mash_neighbor_joining_tree.png
+```
 
-`results/figures/ecoli_mash_neighbor_joining_tree.png`
-
----
-
-# Visualization
-
-Python scripts were used to generate figures summarizing the AMR analysis.
-
-Available visualizations include:
-
-* AMR determinants by antibiotic class
-* AMR determinants by genomic replicon
-* AMR class distribution by genomic location
-* Comparative AMR profile
-* Mash-based whole-genome neighbor-joining tree
-
-Figures are available in:
-
-`results/figures/`
+This analysis provides a genome-wide distance-based view of the selected isolates. The resulting neighbor-joining tree should not be interpreted as a conventional core-genome or SNP-based phylogeny.
 
 ---
 
-# Key Findings
+# 9. Visualizations
 
-The analysis identified **18 unique AMR determinants** in AR Bank #0346 compared with **0 AMR determinants detected in K-12 MG1655** under the analysis conditions used.
+The project includes the following figures:
 
-The AR Bank #0346 isolate contained resistance determinants associated with nine antimicrobial classes and carried AMR determinants on both chromosomal and plasmid replicons.
+| Figure                                 | Description                                                            |
+| -------------------------------------- | ---------------------------------------------------------------------- |
+| `amr_by_antibiotic_class.png`          | AMR determinants by antibiotic class                                   |
+| `amr_by_replicon.png`                  | AMR gene-replicon occurrences by genomic replicon                      |
+| `amr_class_by_location.png`            | AMR gene-replicon occurrences by antibiotic class and genomic location |
+| `amr_comparison.png`                   | Comparison of unique AMR determinants between K-12 and AR Bank #0346   |
+| `ecoli_mash_neighbor_joining_tree.png` | Neighbor-joining tree based on Mash whole-genome distances             |
 
-A notable finding was the detection of **`mcr-1.1` on plasmid CP066368.1**, alongside `blaCTX-M-55` on the same plasmid.
-
-Plasmid CP066367.1 also contained multiple AMR determinants, including `blaCTX-M-55`, `fosA3`, `blaTEM`, `floR`, `tet(A)`, and aminoglycoside resistance determinants.
-
-The genomic-context analysis identified regions containing mobile-element-associated features around selected AMR determinants, providing targets for further investigation.
-
----
-
-# Interpretation and Limitations
-
-The results demonstrate that AMR in AR Bank #0346 is associated with multiple resistance determinants distributed across both chromosomal and plasmid replicons.
-
-The analysis suggests that plasmids represent an important component of the AMR genomic landscape in this isolate, based on the presence and distribution of multiple resistance determinants.
-
-However, several limitations should be considered:
-
-* AMRFinderPlus detects sequence determinants associated with resistance; detection alone does not demonstrate gene expression or phenotypic resistance.
-* The presence of a resistance determinant does not establish that it is actively expressed.
-* Genomic proximity to mobility-associated genes does not by itself demonstrate horizontal gene transfer.
-* The analysis compares two selected genomes and therefore does not represent the diversity of *E. coli* as a species.
-* The Mash analysis describes genomic similarity/distance within the selected dataset and should not be interpreted as a population-scale phylogeny.
-* The `blaTEM` result was classified by AMRFinderPlus as a partial hit and was therefore distinguished from the complete `blaTEM-1` determinant.
-
-The `qacEdelta1` determinant was also detected. AMRFinderPlus classified this as a biocide/stress determinant rather than an AMR determinant, so it was excluded from the total of 18 AMR determinants.
+All figures generated by the Python plotting scripts are saved at 300 dpi.
 
 ---
 
-# Reproducibility
+# 10. Repository structure
 
-The analysis was performed in a Linux/WSL2 environment using Conda-managed software.
+```text
+ecoli-comparative-amr/
+│
+├── data/
+│   └── metadata/
+│       └── genome_metadata.tsv
+│
+├── results/
+│   ├── amr/
+│   │   ├── amr_class_by_location.tsv
+│   │   ├── amr_comparison_summary.tsv
+│   │   ├── ar0346_amr_summary.tsv
+│   │   ├── ar0346_amrfinder.tsv
+│   │   ├── k12_amrfinder.tsv
+│   │   └── plasmid_amr_summary.tsv
+│   │
+│   ├── annotation/
+│   │   ├── ecoli_ar0346.gff3
+│   │   ├── ar0346_bakta/
+│   │   └── k12_bakta_v3/
+│   │
+│   ├── figures/
+│   │   ├── amr_by_antibiotic_class.png
+│   │   ├── amr_by_replicon.png
+│   │   ├── amr_class_by_location.png
+│   │   ├── amr_comparison.png
+│   │   └── ecoli_mash_neighbor_joining_tree.png
+│   │
+│   ├── phylogeny/
+│   │   ├── ecoli_all_distances.tsv
+│   │   ├── ecoli_mash_distances.tsv
+│   │   ├── ecoli_mash_neighbor_joining.nwk
+│   │   └── ecoli_sketches.txt
+│   │
+│   └── qc/
+│       └── ar0346_quast_report.tsv
+│
+├── scripts/
+│   ├── build_mash_tree.py
+│   ├── plot_amr_class_by_location.py
+│   ├── plot_amr_classes.py
+│   ├── plot_amr_comparison.py
+│   ├── plot_amr_replicons.py
+│   ├── plot_mash_tree.py
+│   ├── run_amr_analysis.sh
+│   └── run_full_analysis.sh
+│
+├── .gitignore
+└── README.md
+```
 
-The repository contains:
-
-* Analysis scripts
-* AMR result tables
-* Genome annotation outputs
-* Quality-control results
-* Mash distance and tree files
-* Generated figures
-* Metadata
-* Documentation
-
-The main workflow can be executed using the provided Bash scripts in:
-
-`scripts/`
+Raw genome files and large local databases are excluded from version control.
 
 ---
 
-# Skills Demonstrated
+# 11. Reproducibility
+
+The repository contains Bash and Python scripts used during the analysis.
+
+The main workflow script performs:
+
+```text
+QUAST
+   ↓
+Bakta
+   ↓
+AMRFinderPlus
+```
+
+Additional scripts perform AMR result processing, visualization, and Mash-based distance/tree analysis.
+
+The project was developed in a Linux environment through WSL2 using a Conda environment.
+
+The analysis uses publicly available genome data and can be reproduced by obtaining the same input assemblies and installing the required software.
+
+---
+
+# 12. Skills demonstrated
 
 This project demonstrates practical experience with:
 
-**Bacterial genomics**
-
-* Whole-genome sequence analysis
+* Bacterial whole-genome sequence analysis
+* Genome assembly quality assessment
 * Genome annotation
-* Replicon-level analysis
-* Genomic context analysis
-
-**Antimicrobial resistance**
-
 * AMR determinant detection
 * AMR classification
-* Chromosomal vs plasmid localization
-* Interpretation of AMR genomic context
-* Mobile genetic element-associated analysis
-
-**Bioinformatics**
-
-* Linux / WSL2
+* Chromosome/plasmid analysis
+* Genomic-context inspection
+* Whole-genome distance analysis
+* Neighbor-joining tree construction
 * Bash scripting
-* Conda environments
-* Python data analysis
-* Data visualization
-* Command-line bioinformatics tools
-* Reproducible workflows
-
-**Tools**
-
-* QUAST
-* Bakta
-* AMRFinderPlus
-* Mash
-* Python
+* Python scripting
+* Data processing and visualization
+* Reproducible bioinformatics workflows
+* Linux/WSL2 and Conda environments
 
 ---
 
-# Project Status
+# 13. Project status
 
-* [x] Genome selection
-* [x] Genome sequence retrieval
-* [x] Genome quality assessment
-* [x] Genome annotation
-* [x] AMR detection
-* [x] AMR classification
-* [x] Replicon-level analysis
-* [x] Comparative AMR analysis
-* [x] AMR visualization
-* [x] Genomic context analysis
-* [x] Whole-genome distance analysis using Mash
-* [x] Comparative interpretation of AMR genomic context
+**Completed portfolio project**
+
+The current version includes genome QC, annotation, AMR detection, comparative AMR analysis, replicon analysis, genomic-context inspection, whole-genome distance analysis, visualization, and reproducible analysis scripts.
+
+Future extensions could include analysis of additional *E. coli* isolates, larger-scale AMR comparisons, sequence typing, core-genome analysis, or more detailed investigation of resistance-associated genomic regions.
 
 ---
 
-## Research Relevance
+## Research relevance
 
-This project provided hands-on experience in bacterial genomics, antimicrobial resistance bioinformatics, genome annotation, command-line analysis, genomic-context interpretation, and computational data visualization.
+This project was developed to build practical experience in bacterial genomics, antimicrobial resistance analysis, and computational biology.
 
-The workflow is directly relevant to research involving bacterial genomics, antimicrobial resistance, infectious disease, pathogen genomics, and computational approaches to life-science research.
-
+It provides a foundation for further work involving bacterial whole-genome sequencing, AMR surveillance, genomic epidemiology, and bioinformatics-based investigation of resistance mechanisms.
