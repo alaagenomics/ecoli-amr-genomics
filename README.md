@@ -262,9 +262,9 @@ The **`qacEdelta1`** determinant was also detected. AMRFinderPlus classified it 
 * [x] Replicon-level analysis
 * [x] Comparative analysis with *E. coli* K-12
 * [x] AMR distribution visualization
-* [ ] Genomic context analysis
-* [ ] Phylogenetic analysis
-* [ ] Final comparative interpretation
+* [x] Genomic context analysis
+* [x] Whole-genome distance analysis using Mash
+* [x] Comparative interpretation of AMR genomic context
 
 ## Reproducibility
 
