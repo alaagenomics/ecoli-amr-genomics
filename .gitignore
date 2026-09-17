@@ -1,19 +1,54 @@
-# Raw genome sequences
+# =========================
+# Raw genome / sequencing data
+# =========================
 data/raw/
+*.fasta
+*.fa
+*.fna
+*.fastq
+*.fq
+*.fastq.gz
+*.fq.gz
 
+# =========================
 # Large/local databases
+# =========================
 *.tar.xz
 *.msh
 
-# Temporary MAFFT files
+# =========================
+# Temporary files
+# =========================
 mafft.*
+*.tmp
+*.temp
 
-# Python cache
+# =========================
+# Python
+# =========================
 __pycache__/
 *.pyc
+*.pyo
 
-# Conda/environment files
+# =========================
+# Conda / environment files
+# =========================
 .env
+.venv/
+venv/
 
-# Duplicate QUAST output
+# =========================
+# QUAST temporary/duplicate output
+# =========================
 quast_results/
+
+# =========================
+# Bakta temporary/local outputs
+# =========================
+*.log
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
